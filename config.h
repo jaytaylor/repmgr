@@ -40,6 +40,7 @@ typedef struct
 	int  master_response_timeout;
 	int  reconnect_attempts;
 	int  reconnect_intvl;
+	bool force_backup_io; // Will cause the force flag to be set to true when initiating via pg_start_backup().
 } t_configuration_options;
 
 void parse_config(const char *config_file, t_configuration_options *options);

@@ -1018,7 +1018,7 @@ do_standby_clone(void)
 	 */
 	sqlquery_snprintf(
 	    sqlquery,
-	    "SELECT pg_xlogfile_name(pg_start_backup('repmgr_standby_clone_%ld'))",
+	    options.force_backup_io ? "SELECT pg_xlogfile_name(pg_start_backup('repmgr_standby_clone_%ld', TRUE))" : "SELECT pg_xlogfile_name(pg_start_backup('repmgr_standby_clone_%ld'))",
 	    time(NULL));
 	log_debug(_("standby clone: %s\n"), sqlquery);
 	res = PQexec(conn, sqlquery);

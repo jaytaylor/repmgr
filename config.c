@@ -50,6 +50,8 @@ parse_config(const char *config_file, t_configuration_options *options)
 	options->reconnect_attempts = 6;
 	options->reconnect_intvl = 10;
 
+	options->force_backup_io = false;
+
 	/*
 	 * Since some commands don't require a config file at all, not
 	 * having one isn't necessarily a problem.
@@ -114,6 +116,8 @@ parse_config(const char *config_file, t_configuration_options *options)
 			options->reconnect_attempts = atoi(value);
 		else if (strcmp(name, "reconnect_interval") == 0)
 			options->reconnect_intvl = atoi(value);
+		else if (strcmp(name, "force_backup_io") == 0)
+			options->force_backup_io = strcmp(value, "1") == 0 || strcmp(value, "true") == 0 || strcmp(value, "yes") == 0;
 		else
 			log_warning(_("%s/%s: Unknown name/value pair!\n"), name, value);
 	}
